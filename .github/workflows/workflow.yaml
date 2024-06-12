@@ -13,19 +13,15 @@ jobs:
     steps:
       - name: Set up Git
         run: |
-            uname -a
-            which git
-            git --version
-          # Replace "/custom/path/to/git" with the actual path to the Git executable
-            export PATH="/usr/bin/:$PATH"
+          uname -a
+          which git
+          git --version
+          export PATH="/usr/bin/:$PATH"
 
       - name: Check Git version
         run: |
-            echo $PATH
+          echo $PATH
             
-          # Replace "/custom/path/to/git" with the actual path to the Git executable
-          #/c/Program\ Files/Git/bin/git --version
-          
       - name: Checkout kubefiles branch
         uses: actions/checkout@v2
         with:
@@ -44,6 +40,5 @@ jobs:
       
       - name: Deploy to Kubernetes
         run: |
+          export KUBECONFIG=$HOME/.kube/config
           kubectl apply -f kubernetes/healthCheckDeploy.yaml
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
