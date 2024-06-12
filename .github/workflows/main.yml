@@ -1,0 +1,35 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - kubefiles
+  workflow_dispatch: # Manual trigger
+
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout kubefiles branch
+        uses: actions/checkout@v2
+        with:
+          ref: kubefiles
+      
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest
+      
+      - name: Deploy to Kubernetes
+        uses: appleboy/kubectl-action@v0.1.4
+        with:
+          kubeconfig: ${{ secrets.KUBE_CONFIG }}
+          args: apply -f kubernetes/healthCheckDeploy.yaml
