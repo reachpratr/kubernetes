@@ -14,12 +14,12 @@ jobs:
       - name: Set up Git
         run: |
           # Replace "/custom/path/to/git" with the actual path to the Git executable
-          export PATH="/c/Program\ Files/Git/bin:$PATH"
+          export PATH="'/c/Program\ Files/Git/bin':$PATH"
 
       - name: Check Git version
         run: |
           # Replace "/custom/path/to/git" with the actual path to the Git executable
-          /c/Program Files/Git/bin/git --version
+          /c/Program\ Files/Git/bin/git --version
           
       - name: Checkout kubefiles branch
         uses: actions/checkout@v2
