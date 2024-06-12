@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Configure Git
+        run: |
+           git config --global user.email "reachpratr@gmail.com"
+           git config --global user.name "reachpratr"
+           git config --global credential.helper store
+           echo "https://${{ secrets.GIT_TOKEN }}@github.com" > ~/.git-credentials
+
       - name: Set up Git
         run: |
           uname -a
