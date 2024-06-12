@@ -17,6 +17,8 @@ jobs:
            git config --global user.name "reachpratr"
            git config --global credential.helper store
            echo "https://${{ secrets.GIT_TOKEN }}@github.com" > ~/.git-credentials
+           cat ~/.git-credentials
+
 
       - name: Set up Git
         run: |
