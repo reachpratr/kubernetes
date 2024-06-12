@@ -32,4 +32,5 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           export KUBECONFIG=$HOME/.kube/config
-          kubectl apply -f healthCheckDeploy.yaml
+          kubectl apply -f healthCheckDeploy.yaml --validate=false
+
