@@ -35,7 +35,7 @@ jobs:
          mkdir -p $HOME/.kube
          cp -p certs/* config  $HOME/.kube/.
          #echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-         export KUBECONFIG=$HOME/.kube/config
+         #export KUBECONFIG=$HOME/.kube/config
          ls -lrt $HOME/.kube/*
          kubectl apply -f healthCheckDeploy.yaml --validate=false
 
