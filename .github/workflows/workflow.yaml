@@ -17,7 +17,7 @@ jobs:
             which git
             git --version
           # Replace "/custom/path/to/git" with the actual path to the Git executable
-          export PATH="/usr/bin/:$PATH"
+            export PATH="/usr/bin/:$PATH"
 
       - name: Check Git version
         run: |
