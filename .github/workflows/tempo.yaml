@@ -28,9 +28,11 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest
+          echo "${{ secrets.KUBECONFIG }}" 
       
       - name: Deploy to Kubernetes
         run: |
+         echo "${{ secrets.KUBECONFIG }}" 
          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
          export KUBECONFIG=$HOME/.kube/config
          kubectl apply -f healthCheckDeploy.yaml --validate=false
