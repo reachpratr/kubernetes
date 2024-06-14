@@ -15,3 +15,5 @@ spec:
       containers:
       - name: health-check-container
         image: littleconsumer/my-health-check-app:latest
+        ports:
+        - containerPort: 8080  #app litsens on this port
