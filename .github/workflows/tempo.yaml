@@ -32,10 +32,14 @@ jobs:
       
       - name: Deploy to Kubernetes
         run: |
-         mkdir -p $HOME/.kube
-         cp -p certs/* config  $HOME/.kube/.
+         #mkdir -p $HOME/.kube
+         #cp -p certs/* config  $HOME/.kube/.
          #echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
          #export KUBECONFIG=$HOME/.kube/config
-         ls -lrt $HOME/.kube/*
+         #ls -lrt $HOME/.kube/*
          kubectl apply -f healthCheckDeploy.yaml --validate=false
-
+      - name: Expose deployment using NodePort
+        run: |
+          kubectl expose deployment health-check-deployment --type=NodePort --name=health-check-nodeport --port=8080 --target-port=8080
+          
+        
