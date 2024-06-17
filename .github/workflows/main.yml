@@ -34,7 +34,7 @@ jobs:
         run: |
          mkdir -p $HOME/.kube
          pwd
-         cd $HOME
+         cd /home/runner/work/kubernetes/kubernetes
          pwd
          ls -lrt
          cp -pr config certs/client.crt /certs/client.key certs/ca.pem $HOME/.kube/.
