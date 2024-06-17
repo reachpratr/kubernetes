@@ -17,3 +17,7 @@ spec:
         image: littleconsumer/my-health-check-app:latest
         ports:
         - containerPort: 8080  #app litsens on this port
+        env:
+        - name: API_URL
+          value: "http://health-check-nodeport:8080/api"
+
