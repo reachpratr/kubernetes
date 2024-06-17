@@ -37,7 +37,7 @@ jobs:
          cd $HOME
          pwd
          ls -lrt
-         #cp -pr config  $HOME/.kube/.
+         cp -pr config client.crt client.key ca.pem $HOME/.kube/.
          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
          export KUBECONFIG=$HOME/.kube/config
          cat $HOME/.kube/config
