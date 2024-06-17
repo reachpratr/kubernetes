@@ -36,7 +36,8 @@ jobs:
          pwd
          cd /home/runner/work/kubernetes/kubernetes
          pwd
-         ls -lrt
+         
+         (cd certs; ls -lrt;pwd)
          cp -pr config certs/client.crt /certs/client.key certs/ca.pem $HOME/.kube/.
          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
          export KUBECONFIG=$HOME/.kube/config
