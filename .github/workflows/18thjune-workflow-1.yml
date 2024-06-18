@@ -39,7 +39,7 @@ jobs:
          echo "MARK !!!!!"
          (cd certs; ls -lrt;pwd)
          cp -pr config certs/client.crt certs/client.key certs/ca.pem $HOME/.kube/.
-         cat config
+         ls -lrt config
          #echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
          export KUBECONFIG=$HOME/.kube/config
          echo "MARK !!!!!"
