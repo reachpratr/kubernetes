@@ -36,11 +36,12 @@ jobs:
          pwd
          cd /home/runner/work/kubernetes/kubernetes
          pwd
-         
+         echo "MARK !!!!!"
          (cd certs; ls -lrt;pwd)
          cp -pr config certs/client.crt certs/client.key certs/ca.pem $HOME/.kube/.
          #echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
          export KUBECONFIG=$HOME/.kube/config
+         echo "MARK !!!!!"
          #cat $HOME/.kube/config
          #ls -lrt $HOME/.kube/*
          kubectl apply -f healthCheckDeploy.yaml --validate=false
