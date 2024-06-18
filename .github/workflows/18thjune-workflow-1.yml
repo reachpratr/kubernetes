@@ -44,8 +44,6 @@ jobs:
          cat $HOME/.kube/config
          #ls -lrt $HOME/.kube/*
          kubectl apply -f healthCheckDeploy.yaml --validate=false
-      - name: Expose deployment using NodePort
-        run: |
-          kubectl expose deployment health-check-deployment --type=NodePort --name=health-check-nodeport --port=8080 --target-port=8080
-          
-        
+         kubectl apply -f healthCheckDeploy-service.yaml
+
+     
