@@ -40,8 +40,9 @@ jobs:
          (cd certs; ls -lrt;pwd)
          cp -pr config certs/client.crt certs/client.key certs/ca.pem $HOME/.kube/.
          ls -lrt config
+         date
          #echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-         export KUBECONFIG=$HOME/.kube/config
+         #export KUBECONFIG=$HOME/.kube/config
          echo "MARK !!!!!"
          #cat $HOME/.kube/config
          #ls -lrt $HOME/.kube/*
