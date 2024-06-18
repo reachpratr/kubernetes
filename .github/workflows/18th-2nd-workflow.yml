@@ -34,12 +34,21 @@ jobs:
         run: |
           mkdir -p $HOME/.kube
           cd $GITHUB_WORKSPACE  # Navigate to the GitHub workspace directory
-          cp -pr certs/client.crt certs/client.key certs/ca.pem config $HOME/.kube/
-          ls -lrt $HOME/.kube  # List the copied files to verify
 
-          # Assuming the kubeconfig content is stored in the secret KUBECONFIG
+          # Create the kubeconfig file
           echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
           
+          # Ensure proper permissions
+          chmod 600 $HOME/.kube/config
+          
           export KUBECONFIG=$HOME/.kube/config
+          
+          # Debugging output
+          echo "Kubeconfig file:"
+          cat $HOME/.kube/config
+          echo "Listing kubeconfig directory:"
+          ls -la $HOME/.kube
+          
+          # Apply Kubernetes configurations
           kubectl apply -f healthCheckDeploy.yaml --validate=false
           kubectl apply -f healthCheckDeploy-service.yaml
