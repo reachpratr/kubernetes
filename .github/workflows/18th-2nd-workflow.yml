@@ -40,6 +40,8 @@ jobs:
           
           # Ensure proper permissions
           chmod 600 $HOME/.kube/config
+          echo "MARK PERMISSION"
+          (cd $HOME/.kube; ls -lrt)
           
           export KUBECONFIG=$HOME/.kube/config
           
