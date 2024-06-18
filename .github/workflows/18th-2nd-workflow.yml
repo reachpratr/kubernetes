@@ -4,20 +4,21 @@ on:
   push:
     branches:
       - KubeFiles
-  workflow_dispatch: ## Manual trigger
+  workflow_dispatch:  ## Manual trigger
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
 
-    steps:   # <--- Indentation fixed here
+    steps:
       - name: Checkout kubefiles branch
         uses: actions/checkout@v4
         with:
           ref: KubeFiles
+          
       - name: List files in directory
         run: ls -la
-        
+
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -28,26 +29,17 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest
-         ## echo "${{ secrets.KUBECONFIG }}" 
-      
+
       - name: Deploy to Kubernetes
         run: |
-         mkdir -p $HOME/.kube
-         pwd
-         cd /home/runner/work/kubernetes/kubernetes
-         pwd
-         echo "MARK !!!!!"
-         (cd certs; ls -lrt;pwd)
-         cp -pr config certs/client.crt certs/client.key certs/ca.pem $HOME/.kube/.
-         ls -lrt config
-         echo "MARK !!!!!"
-         date
-         #echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
-         #export KUBECONFIG=$HOME/.kube/config
-         echo "MARK !!!!!"
-         #cat $HOME/.kube/config
-         #ls -lrt $HOME/.kube/*
-         #kubectl apply -f healthCheckDeploy.yaml --validate=false
-        # kubectl apply -f healthCheckDeploy-service.yaml
+          mkdir -p $HOME/.kube
+          cd $GITHUB_WORKSPACE  # Navigate to the GitHub workspace directory
+          cp -pr certs/client.crt certs/client.key certs/ca.pem config $HOME/.kube/
+          ls -lrt $HOME/.kube  # List the copied files to verify
 
-     
+          # Assuming the kubeconfig content is stored in the secret KUBECONFIG
+          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
+          
+          export KUBECONFIG=$HOME/.kube/config
+          kubectl apply -f healthCheckDeploy.yaml --validate=false
+          kubectl apply -f healthCheckDeploy-service.yaml
