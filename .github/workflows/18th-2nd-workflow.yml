@@ -47,7 +47,7 @@ jobs:
          echo "MARK !!!!!"
          #cat $HOME/.kube/config
          #ls -lrt $HOME/.kube/*
-         kubectl apply -f healthCheckDeploy.yaml --validate=false
-         kubectl apply -f healthCheckDeploy-service.yaml
+         #kubectl apply -f healthCheckDeploy.yaml --validate=false
+        # kubectl apply -f healthCheckDeploy-service.yaml
 
      
