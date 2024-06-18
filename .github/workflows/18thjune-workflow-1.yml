@@ -28,7 +28,7 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/my-health-check-app:latest
-          echo "${{ secrets.KUBECONFIG }}" 
+         ## echo "${{ secrets.KUBECONFIG }}" 
       
       - name: Deploy to Kubernetes
         run: |
@@ -41,7 +41,7 @@ jobs:
          cp -pr config certs/client.crt certs/client.key certs/ca.pem $HOME/.kube/.
          #echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
          export KUBECONFIG=$HOME/.kube/config
-         cat $HOME/.kube/config
+         #cat $HOME/.kube/config
          #ls -lrt $HOME/.kube/*
          kubectl apply -f healthCheckDeploy.yaml --validate=false
          kubectl apply -f healthCheckDeploy-service.yaml
