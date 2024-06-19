@@ -50,6 +50,10 @@ jobs:
           cat $HOME/.kube/config
           echo "Listing kubeconfig directory:"
           ls -la $HOME/.kube
+
+          # Apply ClusterRole and ClusterRoleBinding configurations
+          kubectl apply -f clusterrole.yaml
+          kubectl apply -f clusterrolebinding.yaml
           
           # Apply Kubernetes configurations
           kubectl apply -f healthCheckDeploy.yaml --validate=false
