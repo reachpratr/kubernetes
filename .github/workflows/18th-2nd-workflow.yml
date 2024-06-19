@@ -41,7 +41,7 @@ jobs:
           # Ensure proper permissions
           chmod 600 $HOME/.kube/config
           echo "MARK PERMISSION"
-          (cp $GITHUB_WORKSPACE/certs/* $HOME/.kube/.; pwd; ls -lrt)
+          (cp $GITHUB_WORKSPACE/certs/* $HOME/.kube/.; cp $GITHUB_WORKSPACE/config $HOME/.kube/.;pwd; ls -lrt)
           
           export KUBECONFIG=$HOME/.kube/config
           
